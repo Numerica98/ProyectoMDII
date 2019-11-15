@@ -1,0 +1,242 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+
+using namespace std;
+
+int cantDados;
+int *p = new int[5];
+int cantMonedas;
+
+void menu() {
+    cout << "*************** MENU ***************" << endl;
+    cout << "\t1 - Juego de los dados" << endl;
+    cout << "\t2 - Juego de las monedas" << endl;
+    cout << "\t3 - Juego combinado" << endl;
+    cout << "\t4 - salir" << endl;
+    cout << "*************** MENU ***************" << endl;
+}
+
+void menuDados() {
+    cout << "*************** MENU ***************" << endl;
+    cout << "\t1 - Todos par" << endl;
+    cout << "\t2 - Todos impar" << endl;
+    cout << "\t3 - Intercalado" << endl;
+    cout << "\t4 - Todos numero primo" << endl;
+    cout << "\t5 - Todos numero primo y par" << endl;
+    cout << "\t6 - Personalizado" << endl;
+    cout << "\t7 - salir" << endl;
+    cout << "*************** MENU ***************" << endl;
+}
+
+void menuMonedas() {
+    cout << "*************** MENU ***************" << endl;
+    cout << "\t1 - Todos cara" << endl;
+    cout << "\t2 - Todos corona" << endl;
+    cout << "\t3 - Intercalado" << endl;
+    cout << "\t4 - salir" << endl;
+    cout << "*************** MENU ***************" << endl;
+}
+
+void menuMixto() {
+    cout << "*************** MENU ***************" << endl;
+    cout << "\t1 - Dados primo y par, monedas cara" << endl;
+    cout << "\t2 - Dados primo e impar, monedas corona" << endl;
+    cout << "\t3 - Dados mayor a 2, monedas cara" << endl;
+    cout << "\t4 - salir" << endl;
+    cout << "*************** MENU ***************" << endl;
+}
+
+void DadosPersonalizado() {
+
+    cout << "*************** MENU ***************" << endl;
+    cout << "\t1 - Numero par" << endl;
+    cout << "\t2 - Numero impar" << endl;
+    cout << "\t3 - Numero primo e impar" << endl;
+    cout << "\t4 - Numero primo y par" << endl;
+    cout << "*************** MENU ***************" << endl;
+
+
+}
+
+void Dados() {
+
+    cout << "Cantidad de dados a lanzar:" << endl;
+    cin >> cantDados;
+
+    if (cantDados > 0) {
+        int opcion = 0;
+        do {
+            menuDados();
+            cout << "ingrese opcion: ";
+            cin >> opcion;
+            switch (opcion) {
+
+                case 1: double prob;
+                    prob = pow(0.5, cantDados);
+                    cout << "La probabilidad que todos los dados salgan con un numero par es: " << prob * 100 << "%" << endl;
+                    break;
+                case 2:  prob;
+                    prob = pow(0.5, cantDados);
+                    cout << "La probabilidad que todos los dados salgan con un numero impar es: " << prob * 100 << "%" << endl;
+                    break;
+                case 3:  prob;
+                    prob = pow(0.5, cantDados);
+                    cout << "La probabilidad que los dados salgan intercalados entre numero par e impar o viceversa es: " << prob * 100*2 << "%" << endl;
+                    break;
+                case 4:  prob;
+                    prob = pow(0.5, cantDados);
+                    cout << "La probabilidad que todos los dados salgan con un numero primo es: " << prob * 100 << "%" << endl;
+                    break;
+                case 5:  prob;
+                    prob = pow((double)1/6, cantDados);
+                    cout << "La probabilidad que todos los dados salgan con un numero primo y par es: " << prob * 100 << "%" << endl;
+                    break;
+                case 6: delete [] p;
+                    p = new int[cantDados];
+                    for (int i = 0; i < cantDados; i++) {
+backhere:
+                        int opc;
+                        cout << "Seleccione una posibilidad para el dado " << i + 1 << endl;
+                        DadosPersonalizado();
+
+                        cout << "ingrese opcion: ";
+                        cin >> opc;
+                        if (opc > 0 && opc < 5) {
+                            p[i] = opc;
+
+                        } else {
+                            cout << "Opcion invalida. Intente nuevamente" << endl;
+                            goto backhere;
+                        }
+
+                    }
+                    prob=1;
+                    for (int i = 0; i < cantDados; i++) {
+                        
+                        if(p[i]==1 || p[i]==2){
+                            prob=prob*0.5;
+                            
+                        }else if(p[i]==3){
+                            prob=prob*(double)1/6;
+                            
+                        }else if(p[i]==4){
+                            prob=prob*(double)2/6;
+                        }
+                        
+                    }
+                    cout << "La probabilidad de su opcion elegida es: " << prob * 100 << "%" << endl;
+
+                    break;
+                case 7:
+
+                    break;
+                default: cout << "opcion invalida...." << endl;
+                    break;
+
+            }
+        } while (opcion != 7);
+
+    } else {
+        cout << "La antidad de dados a lanzar debe ser mayor a cero." << endl;
+    }
+}
+
+void Monedas() {
+
+    cout << "Cantidad de monedas a lanzar:" << endl;
+    cin >> cantMonedas;
+
+    if (cantMonedas > 0) {
+        int opcion = 0;
+        do {
+            menuMonedas();
+            cout << "ingrese opcion: ";
+            cin >> opcion;
+            switch (opcion) {
+
+                case 1: double prob;
+                    prob = pow(0.5, cantMonedas);
+                    cout << "La probabilidad que todas las monedas caigan cara es: " << prob * 100 << "%" << endl;
+                    
+                    break;
+                case 2: prob = pow(0.5, cantMonedas);
+                    cout << "La probabilidad que todas las monedas caigan corona es: " << prob * 100 << "%" << endl;
+                    break;
+                case 3: prob = pow(0.5, cantMonedas);
+                    cout << "La probabilidad que las monedas caigan intercaladas cara y corona o viceversa es: " << prob * 100*2 << "%" << endl;
+                    break;
+                default: cout << "opcion invalida...." << endl;
+                    break;
+            }
+        } while (opcion != 4);
+
+    } else {
+        cout << "La antidad de monedas a lanzar debe ser mayor a cero." << endl;
+    }
+}
+
+void Mixto() {
+
+    cout << "Cantidad de monedas a lanzar:" << endl;
+    cin >> cantMonedas;
+
+    cout << "Cantidad de dados a lanzar:" << endl;
+    cin >> cantDados;
+
+    if (cantMonedas > 0 && cantDados > 0) {
+        int opcion = 0;
+        do {
+            menuMixto();
+            cout << "ingrese opcion: ";
+            cin >> opcion;
+            switch (opcion) {
+
+                case 1: double prob;
+                prob = pow((double)1/6, cantDados)*pow(0.5, cantMonedas);
+                    cout << "La probabilidad que todos los dados salgan con un numero primo y par y las monedas todas salgan cara es: " << prob * 100 << "%" << endl;
+                    break;
+                case 2: prob = pow((double)2/6, cantDados)*pow(0.5, cantMonedas);
+                    cout << "La probabilidad que todos los dados salgan con un numero primo e impar y las monedas todas salgan corona es: " << prob * 100 << "%" << endl;
+                    break;
+                case 3: prob = pow((double)4/6, cantDados)*pow(0.5, cantMonedas);
+                    cout << "La probabilidad que todos los dados salgan con un numero mayor a 2 y las monedas todas salgan cara es: " << prob * 100 << "%" << endl;
+                    break;
+                default: cout << "opcion invalida...." << endl;
+                    break;
+            }
+        } while (opcion != 4);
+
+    } else {
+        cout << "La antidad de monedas a lanzar debe ser mayor a cero." << endl;
+    }
+}
+
+int main(void) {
+    int opcion;
+
+    do {
+        menu();
+        cout << "ingrese opcion: ";
+        cin >> opcion;
+        switch (opcion) {
+
+            case 1: Dados();
+                break;
+            case 2: Monedas();
+                break;
+            case 3: Mixto();
+                break;
+                case 4: cout << "Programa terminado" << endl;
+                break;
+            default: cout << "opcion invalida...." << endl;
+                break;
+        }
+    } while (opcion != 4);
+
+
+
+
+    return 0;
+}
+
